@@ -1,5 +1,5 @@
 (function() {
-  var MongoClient, ObjectId, assert, findRestaurants, insertDoc, url;
+  var MongoClient, ObjectId, assert, findRestaurants, insertDoc, updateRestaurant, url;
 
   MongoClient = require('mongodb').MongoClient;
 
@@ -58,9 +58,28 @@
     });
   };
 
+  updateRestaurant = function(db, callback) {
+    return db.collection('restaurants').updateOne({
+      "name": "Juni"
+    }, {
+      $set: {
+        "cuisine": "American (New)"
+      },
+      $currentDate: {
+        "lastmodified": true
+      }
+    }, function(err, results) {
+      if (err) {
+        console.error(err);
+      }
+      console.log(results);
+      return callback();
+    });
+  };
+
   MongoClient.connect(url, function(err, db) {
     assert.equal(null, err);
-    findRestaurants(db, function() {
+    updateRestaurant(db, function() {
       return db.close();
     });
     return console.log("All operations completed successfully.");

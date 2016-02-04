@@ -34,7 +34,7 @@ insertDoc = (db, callback) ->
 findRestaurants = (db, callback) ->
   restaurants = db.collection('restaurants').find(
     "cuisine": "Italian"
-    "grades.grade": "A" 
+    "grades.grade": "A"
   ).sort
     "borough": 1
     "address.zipcode": 1
@@ -43,8 +43,17 @@ findRestaurants = (db, callback) ->
     assert.equal null, err
     if doc isnt null then console.dir doc else callback()
 
+updateRestaurant = (db, callback) ->
+  db.collection('restaurants').updateOne { "name": "Juni" }, {
+    $set: "cuisine": "American (New)"
+    $currentDate: "lastmodified": yes
+  }, (err, results) ->
+    console.error err if err
+    console.log results
+    callback()
+
 MongoClient.connect url, (err, db) ->
   assert.equal null, err
-  findRestaurants db, ->
+  updateRestaurant db, ->
     db.close()
   console.log "All operations completed successfully."
