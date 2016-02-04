@@ -42,7 +42,7 @@
   findRestaurants = function(db, callback) {
     var restaurants;
     restaurants = db.collection('restaurants').find({
-      "address.zipcode": "10075"
+      "grades.grade": "B"
     });
     return restaurants.each(function(err, doc) {
       assert.equal(null, err);

@@ -33,7 +33,7 @@ insertDoc = (db, callback) ->
 
 findRestaurants = (db, callback) ->
   restaurants = db.collection('restaurants').find(
-    "address.zipcode": "10075"
+    "grades.grade": "B"
   )
   restaurants.each (err, doc) ->
     assert.equal null, err
