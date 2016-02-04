@@ -1,5 +1,5 @@
 (function() {
-  var MongoClient, ObjectId, assert, insertDoc, url;
+  var MongoClient, ObjectId, assert, findRestaurants, insertDoc, url;
 
   MongoClient = require('mongodb').MongoClient;
 
@@ -39,9 +39,22 @@
     });
   };
 
+  findRestaurants = function(db, callback) {
+    var restaurants;
+    restaurants = db.collection('restaurants').find();
+    return restaurants.each(function(err, doc) {
+      assert.equal(null, err);
+      if (doc !== null) {
+        return console.dir(doc);
+      } else {
+        return callback();
+      }
+    });
+  };
+
   MongoClient.connect(url, function(err, db) {
     assert.equal(null, err);
-    insertDoc(db, function() {
+    findRestaurants(db, function() {
       return db.close();
     });
     return console.log("All operations completed successfully.");
