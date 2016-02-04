@@ -59,11 +59,12 @@
   };
 
   updateRestaurant = function(db, callback) {
-    return db.collection('restaurants').updateOne({
-      "name": "Juni"
+    return db.collection('restaurants').updateMany({
+      "address.zipcode": "10016",
+      "cuisine": "Other"
     }, {
       $set: {
-        "cuisine": "American (New)"
+        "cuisine": "Category to be determined"
       },
       $currentDate: {
         "lastmodified": true

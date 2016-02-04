@@ -44,8 +44,10 @@ findRestaurants = (db, callback) ->
     if doc isnt null then console.dir doc else callback()
 
 updateRestaurant = (db, callback) ->
-  db.collection('restaurants').updateOne { "name": "Juni" }, {
-    $set: "cuisine": "American (New)"
+  db.collection('restaurants').updateMany {
+    "address.zipcode": "10016"
+    "cuisine": "Other" }, {
+    $set: "cuisine": "Category to be determined"
     $currentDate: "lastmodified": yes
   }, (err, results) ->
     console.error err if err
