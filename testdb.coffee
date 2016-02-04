@@ -33,8 +33,10 @@ insertDoc = (db, callback) ->
 
 findRestaurants = (db, callback) ->
   restaurants = db.collection('restaurants').find(
-    "cuisine": "Italian"
-    "address.zipcode": "10075"
+    $or: [
+      "cuisine": "Italian"
+      "address.zipcode": "10075"
+    ]
   )
   restaurants.each (err, doc) ->
     assert.equal null, err

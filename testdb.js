@@ -42,8 +42,12 @@
   findRestaurants = function(db, callback) {
     var restaurants;
     restaurants = db.collection('restaurants').find({
-      "cuisine": "Italian",
-      "address.zipcode": "10075"
+      $or: [
+        {
+          "cuisine": "Italian",
+          "address.zipcode": "10075"
+        }
+      ]
     });
     return restaurants.each(function(err, doc) {
       assert.equal(null, err);
