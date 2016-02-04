@@ -41,7 +41,9 @@
 
   findRestaurants = function(db, callback) {
     var restaurants;
-    restaurants = db.collection('restaurants').find();
+    restaurants = db.collection('restaurants').find({
+      "borough": "Manhattan"
+    });
     return restaurants.each(function(err, doc) {
       assert.equal(null, err);
       if (doc !== null) {

@@ -32,15 +32,15 @@ insertDoc = (db, callback) ->
     callback result
 
 findRestaurants = (db, callback) ->
-  restaurants = db.collection('restaurants').find()
+  restaurants = db.collection('restaurants').find(
+    "borough": "Manhattan"
+  )
   restaurants.each (err, doc) ->
     assert.equal null, err
     if doc isnt null then console.dir doc else callback()
 
 MongoClient.connect url, (err, db) ->
   assert.equal null, err
-  #insertDoc db, ->
-  #  db.close()
   findRestaurants db, ->
     db.close()
   console.log "All operations completed successfully."
