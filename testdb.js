@@ -42,7 +42,9 @@
   findRestaurants = function(db, callback) {
     var restaurants;
     restaurants = db.collection('restaurants').find({
-      "grades.grade": "B"
+      "grades.score": {
+        $gt: 30
+      }
     });
     return restaurants.each(function(err, doc) {
       assert.equal(null, err);

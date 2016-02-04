@@ -33,7 +33,8 @@ insertDoc = (db, callback) ->
 
 findRestaurants = (db, callback) ->
   restaurants = db.collection('restaurants').find(
-    "grades.grade": "B"
+    "grades.score":
+      $gt: 30
   )
   restaurants.each (err, doc) ->
     assert.equal null, err
