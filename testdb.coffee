@@ -32,12 +32,10 @@ insertDoc = (db, callback) ->
     callback result
 
 findRestaurants = (db, callback) ->
-  restaurants = db.collection('restaurants').find(
-    $or: [
-      "cuisine": "Italian"
-      "address.zipcode": "10075"
-    ]
-  )
+  restaurants = db.collection('restaurants').find().sort
+    "borough": 1
+    "address.zipcode": 1
+
   restaurants.each (err, doc) ->
     assert.equal null, err
     if doc isnt null then console.dir doc else callback()
