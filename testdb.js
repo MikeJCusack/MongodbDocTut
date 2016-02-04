@@ -43,7 +43,7 @@
     var restaurants;
     restaurants = db.collection('restaurants').find({
       "grades.score": {
-        $gt: 30
+        $lt: 10
       }
     });
     return restaurants.each(function(err, doc) {
