@@ -32,7 +32,10 @@ insertDoc = (db, callback) ->
     callback result
 
 findRestaurants = (db, callback) ->
-  restaurants = db.collection('restaurants').find().sort
+  restaurants = db.collection('restaurants').find(
+    "cuisine": "Italian"
+    "grades.grade": "A" 
+  ).sort
     "borough": 1
     "address.zipcode": 1
 
