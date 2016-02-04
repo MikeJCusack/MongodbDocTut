@@ -59,15 +59,15 @@
   };
 
   updateRestaurant = function(db, callback) {
-    return db.collection('restaurants').updateMany({
-      "address.zipcode": "10016",
-      "cuisine": "Other"
+    return db.collection('restaurants').replaceOne({
+      "restaurant_id": "41704620"
     }, {
-      $set: {
-        "cuisine": "Category to be determined"
-      },
-      $currentDate: {
-        "lastmodified": true
+      "name": "Vella 2",
+      "address": {
+        "coord": [-73.9557413, 40.7720266],
+        "building": 1480,
+        "street": "2 Avenue",
+        "zipcode": "10075"
       }
     }, function(err, results) {
       if (err) {
